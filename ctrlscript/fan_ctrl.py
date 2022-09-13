@@ -3,6 +3,10 @@ from pathlib import Path
 from time import sleep
 import turtle
 
+maxfanspeed=10000
+deadfanspeed=2000
+minfanspeed=2500
+
 cpu0_temp_path = "/sys/class/thermal/thermal_zone0/temp"
 fan_pwm_reg_path = "/sys/class/pwm/pwmchip1/export"
 fan_pwm_peri_set_path = "/sys/class/pwm/pwmchip1/pwm0/period"
@@ -34,9 +38,9 @@ def read_cputemp():
 
 
 class FAN:
-    def __init__(self, maxspeed_value=10000,
-                 deadspeed_value=2000,
-                 minspeed_value=0):
+    def __init__(self, maxspeed_value=maxfanspeed,
+                 deadspeed_value=deadfanspeed,
+                 minspeed_value=minfanspeed):
         self.maxvalue = maxspeed_value
         self.devalue = deadspeed_value
         self.minvalue = minspeed_value
@@ -64,7 +68,7 @@ def fan_foliner_ctrl(expecttemp, tempwall):
 
 
 
-fan = FAN(8000, 2000, 0)
+fan = FAN()
 
 # check if registered pwm device
 while Path(fan_pwm_peri_set_path).exists() != True:
