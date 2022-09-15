@@ -4,8 +4,8 @@ from time import sleep
 import turtle
 
 maxfanspeed=10000
-deadfanspeed=2000
-minfanspeed=2500
+deadfanspeed=2800
+minfanspeed=2800
 
 cpu0_temp_path = "/sys/class/thermal/thermal_zone0/temp"
 fan_pwm_reg_path = "/sys/class/pwm/pwmchip1/export"
@@ -26,13 +26,13 @@ def set_value2path(path, value):
 
 def read_valuefrompath(path):
     file = open(path, 'r')
-    return float(file.read())
+    return file.read()
 
 # read cpu temeprature
 
 
 def read_cputemp():
-    return (read_valuefrompath(cpu0_temp_path)/1000.0)
+    return (float(read_valuefrompath(cpu0_temp_path))/1000.0)
 
 # set pwm period
 
@@ -71,15 +71,13 @@ def fan_foliner_ctrl(expecttemp, tempwall):
 fan = FAN()
 
 # check if registered pwm device
-while Path(fan_pwm_peri_set_path).exists() != True:
-    # register pwm device
-    set_value2path(fan_pwm_reg_path, '0')
 
-set_value2path(fan_pwm_mod_set_path, 'normal')  # set pwm normal mod
+set_value2path(fan_pwm_reg_path, '0')
 set_value2path(fan_pwm_peri_set_path, fan.maxvalue)  # set pwm period
 set_value2path(fan_pwm_duty_cycle_set_path, fan.devalue)  # set to initial pwm
 set_value2path(fan_pwm_switch_set_path, '1')  # enable pwm
+set_value2path(fan_pwm_mod_set_path, 'normal')  # set pwm normal mod
 
 while True:
-    fan_foliner_ctrl(50.0,70.0)
+    fan_foliner_ctrl(40.0,50.0)
     sleep(2)
