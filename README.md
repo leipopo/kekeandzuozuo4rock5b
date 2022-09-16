@@ -1,5 +1,15 @@
-# keke4rockpi5b //**未经完全验证**//
+# keke4rockpi5b //**个人完全验证**//
 ## 给RockPi 5B V1.4硬件版本用的壳壳
+
+![rp1](/img/rp1.jpg "图")
+
+![rp2](/img/rp2.jpg "图")
+
+![rp3](/img/rp3.jpg "图")
+
+![rp4](/img/rp4.jpg "图")
+
+![rp5](/img/rp5.jpg "图")
 
 ![上图](/img/P1.jpg "上图")
 
