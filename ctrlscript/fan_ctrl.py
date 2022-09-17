@@ -7,6 +7,9 @@ maxfanspeed=10000
 deadfanspeed=2800
 minfanspeed=2800
 
+expecttemperature=45
+temepraturewall =50
+
 cpu0_temp_path = "/sys/class/thermal/thermal_zone0/temp"
 fan_pwm_reg_path = "/sys/class/pwm/pwmchip1/export"
 fan_pwm_peri_set_path = "/sys/class/pwm/pwmchip1/pwm0/period"
@@ -66,6 +69,15 @@ def fan_foliner_ctrl(expecttemp, tempwall):
     else:
         fan.set_power_percent((cpu_temp-expecttemp)/(tempwall-expecttemp))
 
+def fan_switch_ctrl(expecttemp, tempwall):
+    cpu_temp = read_cputemp()
+    if (expecttemp > tempwall):
+        expecttemp = tempwall-1
+    if (cpu_temp < expecttemp):
+        fan.set_power_percent(0)
+    elif(cpu_temp >tempwall):
+        fan.set_power_percent(1)
+
 
 
 fan = FAN()
@@ -79,5 +91,6 @@ set_value2path(fan_pwm_switch_set_path, '1')  # enable pwm
 set_value2path(fan_pwm_mod_set_path, 'normal')  # set pwm normal mod
 
 while True:
-    fan_foliner_ctrl(40.0,50.0)
+    #fan_foliner_ctrl(expecttemperature,temepraturewall)
+    fan_switch_ctrl(expecttemperature,temepraturewall)
     sleep(2)
