@@ -69,7 +69,9 @@ class FAN:
             self.set_power_percent(self.maxpower)
 
         elif (self.cpu_temp < self.exptemp):
-            self.set_power_percent(0)
+            set_value2path(fan_pwm_duty_cycle_set_path,
+                       '0')
+
 
 
 # check if registered pwm device
