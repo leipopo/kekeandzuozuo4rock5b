@@ -66,13 +66,16 @@ class FAN:
             set_value2path(userset_expecttemp, self.exptemp)
 
         if (self.cpu_temp > self.walltemp):
-            #print(fan.cpu_temp)
+            # print(fan.cpu_temp)
+            self.set_power_percent(1)
+            sleep(0.02)
             self.set_power_percent(self.maxpower)
 
         elif (self.cpu_temp < self.exptemp):
-            #print(fan.walltemp)
+            # print(fan.walltemp)
             self.set_power_percent(0)
 
+        self.set_power_percent(self.maxpower)
 
 
 # check if registered pwm device
@@ -94,5 +97,5 @@ while True:
         set_value2path(read_valuefrompath(userset_fan_pwm_cycle))
     else:
         fan.fan_switch_ctrl()
-        
+
     sleep(2)
