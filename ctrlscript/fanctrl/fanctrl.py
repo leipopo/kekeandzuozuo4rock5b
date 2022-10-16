@@ -75,8 +75,6 @@ class FAN:
             # print(fan.walltemp)
             self.set_power_percent(0)
 
-        self.set_power_percent(self.maxpower)
-
 
 # check if registered pwm device
 set_value2path(fan_pwm_reg_path, '0')
