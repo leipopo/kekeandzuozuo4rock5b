@@ -46,6 +46,8 @@
 
 拉取完整仓库：
 
+```cd ~```
+
 ```git clone https://ghproxy.com/https://github.com/leipopo/keke4rockpi5b```
 
 运行风扇脚本：
