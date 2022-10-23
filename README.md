@@ -16,19 +16,22 @@
 
 ![下图](/img/P2.jpg "下图")
 
-![风道剖视图](/img/P3.jpg "风道剖视图")
+![风道剖视图](/img/P4.jpg "风道剖视图")
 
 ## 物料购买注意事项
 
 1. 散热鳍片25x25x11
 2. 滚花螺母尺寸M3 H4 D4.5
-    滚花螺母尺寸M3 H4 D4.5
-    滚花螺母尺寸M3 H4 D4.5
-    重要的事情嗦三遍（用外径5的大了容易顶到附近的小电容）
+
+滚花螺母尺寸M3 H4 D4.5
+
+滚花螺母尺寸M3 H4 D4.5
+
+重要的事情嗦三遍（用外径5的大了容易顶到附近的小电容）
 3. 摄像头，屏幕，GPIO排针都需要线材引出
 4. 无线网卡需要用粘上去的那种天线
 5. 如果使用硅脂导热，需要购买3M的VHB双面胶贴在上盖压住散热片的位置，如上面最后一张图红色部分所示
-6. 需要脚垫可淘宝搜索“橡胶脚垫 机箱仪器”，然后买内径3的
+6. 需要脚垫可淘宝搜索“橡胶脚垫 机箱仪器”，然后买内径3的如下图
 
 ![脚垫图](/img/jiaodian.jpg "脚垫图")
 
@@ -41,8 +44,15 @@
 
 需要sudo权限，要自启的话需要自行操作一下。
 
-拉取完整仓库:
-`git clone https://ghproxy.com/https://github.com/leipopo/keke4rockpi5b`
-运行风扇脚本：
-`cd $HOME/keke4rockpi5b/ctrlscript/fanctrl`
-`sudo python3 fanctrl.py`
+```拉取完整仓库：
+{
+    git clone https://ghproxy.com/https://github.com/leipopo/keke4rockpi5b
+}
+```
+
+```运行风扇脚本：
+{
+    cd $HOME/keke4rockpi5b/ctrlscript/fanctrl
+    sudo python3 fanctrl.py
+}
+```
