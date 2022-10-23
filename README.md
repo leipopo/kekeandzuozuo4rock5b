@@ -44,11 +44,12 @@
 
 需要sudo权限，要自启的话需要自行操作一下。
 
-```拉取完整仓库：
-    git clone https://ghproxy.com/https://github.com/leipopo/keke4rockpi5b
-```
+拉取完整仓库：
 
-```运行风扇脚本：
-    cd $HOME/keke4rockpi5b/ctrlscript/fanctrl
-    sudo python3 fanctrl.py
-```
+```git clone https://ghproxy.com/https://github.com/leipopo/keke4rockpi5b```
+
+运行风扇脚本：
+
+```cd $HOME/keke4rockpi5b/ctrlscript/fanctrl```
+
+```sudo python3 fanctrl.py```
