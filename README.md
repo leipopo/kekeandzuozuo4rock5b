@@ -26,7 +26,7 @@
 
 ![rp5](/img/rp5.jpg "图")
 
-![rp6](/img/rp1.jpg "图")
+![rp6](/img/rp6.jpg "图")
 
 ## 物料购买注意事项
 
