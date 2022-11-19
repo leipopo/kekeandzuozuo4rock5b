@@ -1,5 +1,7 @@
 # keke4rockpi5b 
 
+CAD源文件，链接 https://a360.co/3OjdNzo
+
 ## 给RockPi 5B V1.4硬件版本用的壳壳 （模型以CAD文件为准
 
 ![上图](/img/P1.jpg "上图")
