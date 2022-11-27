@@ -1,5 +1,3 @@
-from threading import Timer
-from pathlib import Path
 from time import sleep
 
 cpu0_temp_path = "/sys/class/thermal/thermal_zone0/temp"
@@ -14,9 +12,9 @@ userset_fan_pwm_cycle = "./pwm_duty_cycle"
 userset_fan_pwm_period = "./pwm_period"
 userset_fan_maxpower = "./fan_max_power"
 userset_fan_dead_duty_cycle = "./fan_dead_duty_cycle"
+userset_fan_max_cycle = "./fan_max_cycle"
 userset_expecttemp = "./exp_temp"
 userset_walltemp = "./wall_temp"
-
 
 # set path by certain value
 
@@ -48,33 +46,45 @@ class FAN:
         self.maxpower = float(read_valuefrompath(userset_fan_maxpower))
         self.deaddutycycle = float(
             read_valuefrompath(userset_fan_dead_duty_cycle))
+        self.maxdutycycle = float(read_valuefrompath(userset_fan_max_cycle))
         self.exptemp = float(read_valuefrompath(userset_expecttemp))
         self.walltemp = float(read_valuefrompath(userset_walltemp))
         self.mod = read_valuefrompath(userset_fan_pwm_mod_path)
 
     def percent2value(self, power):
-        return int(power*(self.pwmperiod-self.deaddutycycle)+self.deaddutycycle)
+        return int(power*(self.maxdutycycle-self.deaddutycycle)+self.deaddutycycle)
 
     def set_power_percent(self, power):
-        set_value2path(fan_pwm_duty_cycle_set_path,
+        if (power > 1):
+            power = 1
+        elif (power < 0):
+            power = 0
+        set_value2path(userset_fan_pwm_cycle,
                        self.percent2value(power))
 
-    def fan_switch_ctrl(self,):
-
+    def fan_switch_ctrl(self):
         if (self.exptemp > self.walltemp):
             self.exptemp = self.walltemp-1
             set_value2path(userset_expecttemp, self.exptemp)
 
         if (self.cpu_temp > self.walltemp):
-            # print(fan.cpu_temp)
             self.set_power_percent(1)
-            sleep(0.02)
-            self.set_power_percent(self.maxpower)
 
         elif (self.cpu_temp < self.exptemp):
-            # print(fan.walltemp)
             self.set_power_percent(0)
 
+    def fan_linear_ctrl(self):
+        if (self.exptemp >= self.walltemp):
+            self.exptemp = self.walltemp-1
+            set_value2path(userset_expecttemp, self.exptemp)
+
+        if (self.cpu_temp > self.exptemp):
+            self.set_power_percent(
+                (fan.cpu_temp-fan.exptemp)/(fan.walltemp-fan.exptemp))
+        elif (self.cpu_temp < self.exptemp):
+            self.set_power_percent(0)
+        elif (self.cpu_temp > self.walltemp):
+            self.fanon
 
 # check if registered pwm device
 set_value2path(fan_pwm_reg_path, '0')
@@ -87,13 +97,16 @@ set_value2path(fan_pwm_mod_set_path, 'normal')  # set pwm normal mod
 
 fan = FAN()
 
-
 while True:
     fan.__init__()
-    if (fan.mod == 0):
-        print(fan.cpu_temp)
-        set_value2path(read_valuefrompath(userset_fan_pwm_cycle))
-    else:
+    #print(fan.mod)
+    if (fan.mod == '0'):
+        print(userset_fan_pwm_cycle)
+    elif (fan.mod == '1'):
         fan.fan_switch_ctrl()
-
+    elif (fan.mod == '2'):
+        fan.fan_linear_ctrl()
+        #print((fan.cpu_temp-fan.exptemp)/(fan.walltemp-fan.exptemp))
+    set_value2path(fan_pwm_duty_cycle_set_path,
+                   read_valuefrompath(userset_fan_pwm_cycle))
     sleep(2)
