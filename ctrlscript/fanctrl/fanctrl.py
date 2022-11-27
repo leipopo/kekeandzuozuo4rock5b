@@ -78,13 +78,11 @@ class FAN:
             self.exptemp = self.walltemp-1
             set_value2path(userset_expecttemp, self.exptemp)
 
-        if (self.cpu_temp > self.exptemp):
+        if (self.cpu_temp > self.exptemp+(fan.walltemp-fan.exptemp)*3/5):
             self.set_power_percent(
                 (fan.cpu_temp-fan.exptemp)/(fan.walltemp-fan.exptemp))
         elif (self.cpu_temp < self.exptemp):
             self.set_power_percent(0)
-        elif (self.cpu_temp > self.walltemp):
-            self.fanon
 
 # check if registered pwm device
 set_value2path(fan_pwm_reg_path, '0')
@@ -109,4 +107,4 @@ while True:
         #print((fan.cpu_temp-fan.exptemp)/(fan.walltemp-fan.exptemp))
     set_value2path(fan_pwm_duty_cycle_set_path,
                    read_valuefrompath(userset_fan_pwm_cycle))
-    sleep(2)
+    sleep(0.02)
