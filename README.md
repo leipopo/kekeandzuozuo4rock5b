@@ -65,10 +65,10 @@
 
 ```cd ~```
 
-```git clone https://ghproxy.com/https://github.com/leipopo/keke4rockpi5b```
+```git clone https://ghproxy.com/https://github.com/leipopo/kekeandzuozuo4rockpi5b```
 
 运行风扇脚本：
 
-```cd $HOME/keke4rockpi5b/ctrlscript/fanctrl```
+```cd $HOME/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl```
 
 ```sudo python3 fanctrl.py```
