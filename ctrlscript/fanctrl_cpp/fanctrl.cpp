@@ -115,7 +115,6 @@ void PWMDEV::init()
 void PWMDEV::setpwmdev()
 {
     writefdate(pwm_dutycycle_path, readfdate(fan_curworkpwm_path));
-    cout << readfdate(fan_curworkpwm_path) << endl;
 }
 
 int main()
@@ -131,7 +130,7 @@ int main()
         fan.pwmcalc();
         fan.setpwm();
         pwmdev.setpwmdev();
-        usleep(50 * 1000); // 50ms
+        usleep(20 * 1000); // 50ms
         // cout << "running" << endl;
         // cout << readfdate(exptemp_path) << endl;
         // cout << readfdate(cpu_temp_path) << endl;
