@@ -42,10 +42,12 @@ int FAN::power2pwm(float power)
 
 void FAN::pwmcalc()
 {
+
     float temp = readfdate(cpu_temp_path) / 1000.;
     float exptemp = readfdate(exptemp_path);
     float walltemp = readfdate(walltemp_path);
     int pwm = readfdate(fan_curworkpwm_path);
+
     if ((exptemp > walltemp) || (exptemp == walltemp))
     {
         writefdate(exptemp_path, walltemp - 1);
@@ -121,8 +123,13 @@ int main()
 {
     PWMDEV pwmdev;
     FAN fan;
-    pwmdev.init();
-    pwmdev.setpwmdev();
+
+    while (readfdate(pwm_enable_path)!=1)
+    {
+        pwmdev.init();
+        pwmdev.setpwmdev();
+        usleep(20 * 1000);
+    }
 
     while (1)
     {
