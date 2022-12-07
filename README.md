@@ -69,6 +69,6 @@
 
 运行风扇脚本：
 
-```cd $HOME/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl```
+```cd $HOME/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build```
 
-```sudo python3 fanctrl.py```
+```sudo ./fanctrl_cpp```
