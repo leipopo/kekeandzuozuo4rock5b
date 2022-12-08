@@ -1,3 +1,2 @@
-.log/
-ctrlscript/fanctrl_cpp/source/fan_pwm
-fan_pwm/
+*.log
+fan_pwm

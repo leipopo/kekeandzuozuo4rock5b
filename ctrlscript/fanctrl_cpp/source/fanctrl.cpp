@@ -43,7 +43,7 @@ int FAN::power2pwm(float power)
 void FAN::pwmcalc()
 {
 
-    float temp = readfdata(cpu_temp_path) / 1000.;
+    float temp = readfdata(cpu_temp_path) / 1000.f;
     float exptemp = readfdata(exptemp_path);
     float walltemp = readfdata(walltemp_path);
     int pwm = readfdata(fan_curworkpwm_path);
