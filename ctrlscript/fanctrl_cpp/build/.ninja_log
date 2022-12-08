@@ -1,8 +1,5 @@
 # ninja log v5
-0	8	0	clean	a31eedcededa8236
-0	361	1670395192705260959	CMakeFiles/fanctrl_cpp.dir/main.cpp.o	50bcc8e45e82feb9
-558	684	1670489948625086627	fanctrl_cpp	883d7d182f60c8d5
-2	557	1670489948498389155	CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o	d25381b28d074aa1
 0	7	0	clean	a31eedcededa8236
-2	550	1670517882448945778	CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o	d25381b28d074aa1
+0	361	1670395192705260959	CMakeFiles/fanctrl_cpp.dir/main.cpp.o	50bcc8e45e82feb9
 550	659	1670517882562277102	fanctrl_cpp	883d7d182f60c8d5
+2	550	1670517882448945778	CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o	d25381b28d074aa1

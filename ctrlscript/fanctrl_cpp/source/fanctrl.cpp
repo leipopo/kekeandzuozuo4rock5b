@@ -137,9 +137,9 @@ int main()
         fan.pwmcalc();
         fan.setpwm();
         pwmdev.setpwmdev();
-        usleep(20 * 1000); // 50ms
-        cout << "running" << endl;
-        cout << readfdata(exptemp_path) << endl;
-        cout << readfdata(cpu_temp_path) << endl;
+        usleep(20 * 1000); // 20ms
+        // cout << "running" << endl;
+        // cout << readfdata(exptemp_path) << endl;
+        // cout << readfdata(cpu_temp_path) << endl;
     }
 }
