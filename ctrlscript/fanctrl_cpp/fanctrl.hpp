@@ -8,7 +8,7 @@ public:
     int mod;
 
     int power2pwm(float power);
-    void readdate();
+    void readdata();
     void pwmcalc();
     void setpwm();
 };

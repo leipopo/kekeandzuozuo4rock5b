@@ -5,7 +5,7 @@
 #include <math.h>
 using namespace std;
 
-int readfdate(const char *path)
+int readfdata(const char *path)
 {
     ifstream file;
     file.open(path, ios::in);
@@ -14,7 +14,7 @@ int readfdate(const char *path)
     file.close();
     return data;
 }
-void writefdate(const char *path, int data)
+void writefdata(const char *path, int data)
 {
     ofstream file;
     file.open(path, ios::out);
@@ -22,16 +22,16 @@ void writefdate(const char *path, int data)
     file.close();
 }
 
-void FAN::readdate()
+void FAN::readdata()
 {
-    this->maxpower = readfdate(fan_maxpower_path);
-    this->minworkpwm = readfdate(fan_minworkpwm_path);
-    this->maxworkpwm = readfdate(fan_maxworkpwm_path);
-    this->mod = readfdate(fan_mod_path);
+    this->maxpower = readfdata(fan_maxpower_path);
+    this->minworkpwm = readfdata(fan_minworkpwm_path);
+    this->maxworkpwm = readfdata(fan_maxworkpwm_path);
+    this->mod = readfdata(fan_mod_path);
 }
 void FAN::setpwm()
 {
-    writefdate(fan_curworkpwm_path, this->curworkpwm);
+    writefdata(fan_curworkpwm_path, this->curworkpwm);
 }
 
 int FAN::power2pwm(float power)
@@ -43,14 +43,14 @@ int FAN::power2pwm(float power)
 void FAN::pwmcalc()
 {
 
-    float temp = readfdate(cpu_temp_path) / 1000.;
-    float exptemp = readfdate(exptemp_path);
-    float walltemp = readfdate(walltemp_path);
-    int pwm = readfdate(fan_curworkpwm_path);
+    float temp = readfdata(cpu_temp_path) / 1000.;
+    float exptemp = readfdata(exptemp_path);
+    float walltemp = readfdata(walltemp_path);
+    int pwm = readfdata(fan_curworkpwm_path);
 
     if ((exptemp > walltemp) || (exptemp == walltemp))
     {
-        writefdate(exptemp_path, walltemp - 1);
+        writefdata(exptemp_path, walltemp - 1);
     }
 
     switch (this->mod)
@@ -61,7 +61,7 @@ void FAN::pwmcalc()
         {
             if (pwm = 0)
             {
-                writefdate(pwm_dutycycle_path, readfdate(fan_pwmperiod_path));
+                writefdata(pwm_dutycycle_path, readfdata(fan_pwmperiod_path));
                 usleep(100 * 1000); // 100ms
             }
             pwm = this->power2pwm(this->maxpower);
@@ -79,7 +79,7 @@ void FAN::pwmcalc()
         {
             if (pwm = 0)
             {
-                writefdate(pwm_dutycycle_path, readfdate(fan_pwmperiod_path));
+                writefdata(pwm_dutycycle_path, readfdata(fan_pwmperiod_path));
                 usleep(100 * 1000); // 100ms
             }
             pwm = this->power2pwm((temp - exptemp) / (walltemp - exptemp));
@@ -100,14 +100,14 @@ void FAN::pwmcalc()
 
 void PWMDEV::init()
 {
-    this->pwmperiod = readfdate(fan_pwmperiod_path);
-    this->pwmdutycycle = readfdate(fan_curworkpwm_path);
+    this->pwmperiod = readfdata(fan_pwmperiod_path);
+    this->pwmdutycycle = readfdata(fan_curworkpwm_path);
     this->pwmexport = 0;
     this->pwmenable = 1;
-    writefdate(pwm_dutycycle_path, this->pwmdutycycle);
-    writefdate(pwm_period_path, this->pwmperiod);
-    writefdate(pwm_enable_path, this->pwmenable);
-    writefdate(pwm_export_path, this->pwmexport);
+    writefdata(pwm_dutycycle_path, this->pwmdutycycle);
+    writefdata(pwm_period_path, this->pwmperiod);
+    writefdata(pwm_enable_path, this->pwmenable);
+    writefdata(pwm_export_path, this->pwmexport);
     ofstream file;
     file.open(pwm_polarity_path, ios::out);
     file << "normal";
@@ -116,7 +116,7 @@ void PWMDEV::init()
 
 void PWMDEV::setpwmdev()
 {
-    writefdate(pwm_dutycycle_path, readfdate(fan_curworkpwm_path));
+    writefdata(pwm_dutycycle_path, readfdata(fan_curworkpwm_path));
 }
 
 int main()
@@ -124,7 +124,7 @@ int main()
     PWMDEV pwmdev;
     FAN fan;
 
-    while (readfdate(pwm_enable_path)!=1)
+    while (readfdata(pwm_enable_path)!=1)
     {
         pwmdev.init();
         pwmdev.setpwmdev();
@@ -133,13 +133,13 @@ int main()
 
     while (1)
     {
-        fan.readdate();
+        fan.readdata();
         fan.pwmcalc();
         fan.setpwm();
         pwmdev.setpwmdev();
         usleep(20 * 1000); // 50ms
         // cout << "running" << endl;
-        // cout << readfdate(exptemp_path) << endl;
-        // cout << readfdate(cpu_temp_path) << endl;
+        // cout << readfdata(exptemp_path) << endl;
+        // cout << readfdata(cpu_temp_path) << endl;
     }
 }
