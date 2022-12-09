@@ -1,4 +1,4 @@
-# Install script for directory: /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp
+# Install script for directory: /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

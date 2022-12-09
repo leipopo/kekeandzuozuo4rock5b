@@ -15,7 +15,7 @@
 ########################
 
 //Build the testing tree.
-BUILD_TESTING:BOOL=ON
+BUILD_TESTING:BOOL=TRUE
 
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/aarch64-linux-gnu-addr2line
@@ -189,10 +189,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+CMAKE_SKIP_INSTALL_RPATH:BOOL=FALSE
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=NO
+CMAKE_SKIP_RPATH:BOOL=FALSE
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -231,52 +231,52 @@ COVERAGE_COMMAND:FILEPATH=/usr/bin/gcov
 COVERAGE_EXTRA_FLAGS:STRING=-l
 
 //Enable to build Debian packages
-CPACK_BINARY_DEB:BOOL=OFF
+CPACK_BINARY_DEB:BOOL=FALSE
 
 //Enable to build FreeBSD packages
-CPACK_BINARY_FREEBSD:BOOL=OFF
+CPACK_BINARY_FREEBSD:BOOL=FALSE
 
 //Enable to build IFW packages
-CPACK_BINARY_IFW:BOOL=OFF
+CPACK_BINARY_IFW:BOOL=FALSE
 
 //Enable to build NSIS packages
-CPACK_BINARY_NSIS:BOOL=OFF
+CPACK_BINARY_NSIS:BOOL=FALSE
 
 //Enable to build RPM packages
-CPACK_BINARY_RPM:BOOL=OFF
+CPACK_BINARY_RPM:BOOL=FALSE
 
 //Enable to build STGZ packages
-CPACK_BINARY_STGZ:BOOL=ON
+CPACK_BINARY_STGZ:BOOL=TRUE
 
 //Enable to build TBZ2 packages
-CPACK_BINARY_TBZ2:BOOL=OFF
+CPACK_BINARY_TBZ2:BOOL=FALSE
 
 //Enable to build TGZ packages
-CPACK_BINARY_TGZ:BOOL=ON
+CPACK_BINARY_TGZ:BOOL=TRUE
 
 //Enable to build TXZ packages
-CPACK_BINARY_TXZ:BOOL=OFF
+CPACK_BINARY_TXZ:BOOL=FALSE
 
 //Enable to build TZ packages
-CPACK_BINARY_TZ:BOOL=ON
+CPACK_BINARY_TZ:BOOL=TRUE
 
 //Enable to build RPM source packages
-CPACK_SOURCE_RPM:BOOL=OFF
+CPACK_SOURCE_RPM:BOOL=FALSE
 
 //Enable to build TBZ2 source packages
-CPACK_SOURCE_TBZ2:BOOL=ON
+CPACK_SOURCE_TBZ2:BOOL=TRUE
 
 //Enable to build TGZ source packages
-CPACK_SOURCE_TGZ:BOOL=ON
+CPACK_SOURCE_TGZ:BOOL=TRUE
 
 //Enable to build TXZ source packages
-CPACK_SOURCE_TXZ:BOOL=ON
+CPACK_SOURCE_TXZ:BOOL=TRUE
 
 //Enable to build TZ source packages
-CPACK_SOURCE_TZ:BOOL=ON
+CPACK_SOURCE_TZ:BOOL=TRUE
 
 //Enable to build ZIP source packages
-CPACK_SOURCE_ZIP:BOOL=OFF
+CPACK_SOURCE_ZIP:BOOL=FALSE
 
 //How many times to retry timed-out CTest submissions.
 CTEST_SUBMIT_RETRY_COUNT:STRING=3
@@ -306,7 +306,7 @@ fanctrl_cpp_BINARY_DIR:STATIC=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanct
 fanctrl_cpp_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-fanctrl_cpp_SOURCE_DIR:STATIC=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp
+fanctrl_cpp_SOURCE_DIR:STATIC=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source
 
 
 ########################
@@ -391,7 +391,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
