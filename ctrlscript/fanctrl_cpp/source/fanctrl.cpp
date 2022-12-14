@@ -62,7 +62,7 @@ void FAN::pwmcalc()
             if (pwm = 0)
             {
                 writefdata(pwm_dutycycle_path, readfdata(fan_pwmperiod_path));
-                usleep(100 * 1000); // 100ms
+                usleep(500 * 1000); // 500ms
             }
             pwm = this->power2pwm(this->maxpower);
         }
@@ -80,7 +80,7 @@ void FAN::pwmcalc()
             if (pwm = 0)
             {
                 writefdata(pwm_dutycycle_path, readfdata(fan_pwmperiod_path));
-                usleep(100 * 1000); // 100ms
+                usleep(500 * 1000); // 500ms
             }
             pwm = this->power2pwm((temp - exptemp) / (walltemp - exptemp));
         }
