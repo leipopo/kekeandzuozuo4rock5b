@@ -55,7 +55,7 @@
 					[
 						0
 					],
-					"name" : "fanctrl_cpp",
+					"name" : "fanctrl",
 					"targetIndexes" : 
 					[
 						0,
@@ -290,9 +290,9 @@
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "fanctrl_cpp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-fanctrl_cpp-Debug-72bd9126ef0e799ccccf.json",
-					"name" : "fanctrl_cpp",
+					"id" : "fanctrl::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fanctrl-Debug-4306be410342c7d96896.json",
+					"name" : "fanctrl",
 					"projectIndex" : 0
 				}
 			]

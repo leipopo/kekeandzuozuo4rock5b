@@ -1,20 +1,8 @@
 #include "fanctrl.hpp"
-#include <fstream>
-#include <iostream>
-#include <unistd.h>
-#include <math.h>
+
 using namespace std;
 
-int readfdata(const char *path)
-{
-    ifstream file;
-    file.open(path, ios::in);
-    int data;
-    file >> data;
-    file.close();
-    return data;
-}
-void writefdata(const char *path, int data)
+void writefile(const char *path, string data)
 {
     ofstream file;
     file.open(path, ios::out);
@@ -22,124 +10,155 @@ void writefdata(const char *path, int data)
     file.close();
 }
 
-void FAN::readdata()
+void FAN ::readconfigfile(const char *path)
 {
-    this->maxpower = readfdata(fan_maxpower_path);
-    this->minworkpwm = readfdata(fan_minworkpwm_path);
-    this->maxworkpwm = readfdata(fan_maxworkpwm_path);
-    this->mod = readfdata(fan_mod_path);
-}
-void FAN::setpwm()
-{
-    writefdata(fan_curworkpwm_path, this->curworkpwm);
-}
+    fstream file;
+    file.open(path, ios::in | ios::out);
+    int begin, end;
+    string line;
+    getline(file, line);
+    begin = line.find_first_of('"');
+    end = line.find_last_of('"');
 
-int FAN::power2pwm(float power)
-{
-    int pwm = (this->maxworkpwm - this->minworkpwm) * fmin(power, this->maxpower) + this->minworkpwm;
-    return pwm;
-}
-
-void FAN::pwmcalc()
-{
-
-    float temp = readfdata(cpu_temp_path) / 1000.f;
-    float exptemp = readfdata(exptemp_path);
-    float walltemp = readfdata(walltemp_path);
-    int pwm = readfdata(fan_curworkpwm_path);
-
-    if ((exptemp > walltemp) || (exptemp == walltemp))
+    if (line.substr(begin + 1, end - begin - 1) == "1")
     {
-        writefdata(exptemp_path, walltemp - 1);
-    }
-
-    switch (this->mod)
-    {
-    case 0:
-    {
-        if (temp > walltemp)
+        file.seekp(begin + 1, ios::beg);
+        file.write("0", 1);
+        file.close();
+        file.open(path, ios::in);
+        while (!file.eof())
         {
-            if (pwm = 0)
+            getline(file, line);
+            end = line.find("=");
+            string item = line.substr(0, end);
+            if (item == "obj")
             {
-                writefdata(pwm_dutycycle_path, readfdata(fan_pwmperiod_path));
-                usleep(500 * 1000); // 500ms
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                string obj_temp = line.substr(begin + 1, end - begin - 1);
+                if (obj_temp == "soc")
+                {
+                    this->obj = soc;
+                }
+                // else if(obj_temp=="ssd")
+                // {
+                //     this->obj=ssd;
+                // }
             }
-            pwm = this->power2pwm(this->maxpower);
-        }
-        else if (temp < exptemp)
-        {
-            pwm = 0;
-        }
-    }
-    break;
-
-    case 1:
-    {
-        if (temp > exptemp + (walltemp - exptemp) * 3 / 5)
-        {
-            if (pwm = 0)
+            else if (item == "exp_temp")
             {
-                writefdata(pwm_dutycycle_path, readfdata(fan_pwmperiod_path));
-                usleep(500 * 1000); // 500ms
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->exp_temp = stof(line.substr(begin + 1, end - begin - 1));
             }
-            pwm = this->power2pwm((temp - exptemp) / (walltemp - exptemp));
-        }
-        else if (temp < exptemp)
-        {
-            pwm = 0;
+            else if (item == "wall_temp")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->wall_temp = stof(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "pwm_period")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->pwm_period = stoi(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "pwm_chip")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->pwm_chip = line.substr(begin + 1, end - begin - 1).c_str();
+            }
+            else if (item == "pwm_channel")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->pwm_channel = line.substr(begin + 1, end - begin - 1).c_str();
+            }
+            else if (item == "fan_maxpwm")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->fan_maxpwm = stoi(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "fan_minpwm")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->fan_minpwm = stoi(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "fan_maxpower")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->fan_maxpower = stof(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "fan_mod")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->fan_mod = stoi(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "fan_pwm")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->fan_pwm = stoi(line.substr(begin + 1, end - begin - 1));
+            }
         }
     }
-    break;
-
-    default:
-        break;
-    }
-
-    this->curworkpwm = pwm;
-}
-
-void PWMDEV::init()
-{
-    this->pwmperiod = readfdata(fan_pwmperiod_path);
-    this->pwmdutycycle = readfdata(fan_curworkpwm_path);
-    this->pwmexport = 0;
-    this->pwmenable = 1;
-    writefdata(pwm_dutycycle_path, this->pwmdutycycle);
-    writefdata(pwm_period_path, this->pwmperiod);
-    writefdata(pwm_enable_path, this->pwmenable);
-    writefdata(pwm_export_path, this->pwmexport);
-    ofstream file;
-    file.open(pwm_polarity_path, ios::out);
-    file << "normal";
     file.close();
 }
 
-void PWMDEV::setpwmdev()
+void FAN::init(const char *path)
 {
-    writefdata(pwm_dutycycle_path, readfdata(fan_curworkpwm_path));
+    fstream file;
+    file.open(path, ios::in | ios::out);
+    int begin, end;
+    string line;
+    getline(file, line);
+    begin = line.find_first_of('"');
+    end = line.find_last_of('"');
+    file.seekp(begin + 1, ios::beg);
+    file.write("1", 1);
+    file.close();
+
+    this->readconfigfile(path);
+    string finalpath;
+    string pwmdev_path = pwm_path;
+    finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/duty_cycle";
+    this->pwm_dutycycle_path = pwmdev_path.c_str();
+
+    finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/period";
+    this->pwm_period_path = pwmdev_path.c_str();
+
+    finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/enable";
+    this->pwm_enable_path = pwmdev_path.c_str();
+
+    finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/polarity";
+    this->pwm_polarity_path = pwmdev_path.c_str();
+
+    finalpath = pwmdev_path + this->pwm_chip + "/export";
+    this->pwm_export_path = pwmdev_path.c_str();
+
+    string data;
+    data = to_string(this->fan_pwm);
+    writefile(pwm_dutycycle_path, data);
+
+    data = to_string(this->pwm_period);
+    writefile(pwm_period_path, data);
+    writefile(pwm_enable_path, "0");
+    writefile(pwm_export_path, "1");
+    writefile(pwm_polarity_path, "normal");
 }
 
 int main()
 {
-    PWMDEV pwmdev;
-    FAN fan;
-
-    while (readfdata(pwm_enable_path)!=1)
-    {
-        pwmdev.init();
-        pwmdev.setpwmdev();
-        usleep(20 * 1000);
-    }
-
+    FAN socfan, ssdfan;
+    socfan.init(soc_fan_configfile_path);
+    ssdfan.init(ssd_fan_configfile_path);
     while (1)
     {
-        fan.readdata();
-        fan.pwmcalc();
-        fan.setpwm();
-        pwmdev.setpwmdev();
-        usleep(20 * 1000); // 20ms
-        // cout << "running" << endl;
-        // cout << readfdata(exptemp_path) << endl;
-        // cout << readfdata(cpu_temp_path) << endl;
+        usleep(1000 * 20);
     }
 }

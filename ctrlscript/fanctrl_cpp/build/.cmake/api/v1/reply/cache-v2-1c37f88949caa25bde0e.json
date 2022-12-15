@@ -851,7 +851,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "fanctrl_cpp"
+			"value" : "fanctrl"
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION",
@@ -1688,6 +1688,42 @@
 			],
 			"type" : "UNINITIALIZED",
 			"value" : ""
+		},
+		{
+			"name" : "fanctrl_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build"
+		},
+		{
+			"name" : "fanctrl_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "fanctrl_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source"
 		},
 		{
 			"name" : "fanctrl_cpp_BINARY_DIR",

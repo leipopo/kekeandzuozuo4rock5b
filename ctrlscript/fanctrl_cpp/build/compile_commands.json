@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build",
-  "command": "/usr/bin/aarch64-linux-gnu-g++ -g -o CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o -c /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source/fanctrl.cpp",
+  "command": "/usr/bin/aarch64-linux-gnu-g++ -g -o CMakeFiles/fanctrl.dir/fanctrl.cpp.o -c /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source/fanctrl.cpp",
   "file": "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source/fanctrl.cpp"
 }
 ]

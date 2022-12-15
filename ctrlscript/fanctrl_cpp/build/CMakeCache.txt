@@ -144,7 +144,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=fanctrl_cpp
+CMAKE_PROJECT_NAME:STATIC=fanctrl
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=0.1.0
@@ -298,6 +298,15 @@ MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 
 //Name of the computer/site where compile is being run
 SITE:STRING=rock-5b
+
+//Value Computed by CMake
+fanctrl_BINARY_DIR:STATIC=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build
+
+//Value Computed by CMake
+fanctrl_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+fanctrl_SOURCE_DIR:STATIC=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source
 
 //Value Computed by CMake
 fanctrl_cpp_BINARY_DIR:STATIC=/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build

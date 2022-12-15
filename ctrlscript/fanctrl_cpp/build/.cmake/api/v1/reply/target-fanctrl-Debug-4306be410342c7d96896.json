@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "fanctrl_cpp"
+			"path" : "fanctrl"
 		}
 	],
 	"backtrace" : 1,
@@ -45,7 +45,7 @@
 			]
 		}
 	],
-	"id" : "fanctrl_cpp::@6890427a1f51a3e7e1df",
+	"id" : "fanctrl::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -61,8 +61,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "fanctrl_cpp",
-	"nameOnDisk" : "fanctrl_cpp",
+	"name" : "fanctrl",
+	"nameOnDisk" : "fanctrl",
 	"paths" : 
 	{
 		"build" : ".",

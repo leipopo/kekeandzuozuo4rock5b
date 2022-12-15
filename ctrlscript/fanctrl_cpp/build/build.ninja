@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: fanctrl_cpp
+# Project: fanctrl
 # Configurations: Debug
 # =============================================================================
 
@@ -209,36 +209,36 @@ build ContinuousMemCheck: phony CMakeFiles/ContinuousMemCheck
 build ContinuousSubmit: phony CMakeFiles/ContinuousSubmit
 
 # =============================================================================
-# Object build statements for EXECUTABLE target fanctrl_cpp
+# Object build statements for EXECUTABLE target fanctrl
 
 
 #############################################
-# Order-only phony target for fanctrl_cpp
+# Order-only phony target for fanctrl
 
-build cmake_object_order_depends_target_fanctrl_cpp: phony || CMakeFiles/fanctrl_cpp.dir
+build cmake_object_order_depends_target_fanctrl: phony || CMakeFiles/fanctrl.dir
 
-build CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o: CXX_COMPILER__fanctrl_cpp_Debug /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source/fanctrl.cpp || cmake_object_order_depends_target_fanctrl_cpp
-  DEP_FILE = CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o.d
+build CMakeFiles/fanctrl.dir/fanctrl.cpp.o: CXX_COMPILER__fanctrl_Debug /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source/fanctrl.cpp || cmake_object_order_depends_target_fanctrl
+  DEP_FILE = CMakeFiles/fanctrl.dir/fanctrl.cpp.o.d
   FLAGS = -g
-  OBJECT_DIR = CMakeFiles/fanctrl_cpp.dir
-  OBJECT_FILE_DIR = CMakeFiles/fanctrl_cpp.dir
+  OBJECT_DIR = CMakeFiles/fanctrl.dir
+  OBJECT_FILE_DIR = CMakeFiles/fanctrl.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target fanctrl_cpp
+# Link build statements for EXECUTABLE target fanctrl
 
 
 #############################################
-# Link the executable fanctrl_cpp
+# Link the executable fanctrl
 
-build fanctrl_cpp: CXX_EXECUTABLE_LINKER__fanctrl_cpp_Debug CMakeFiles/fanctrl_cpp.dir/fanctrl.cpp.o
+build fanctrl: CXX_EXECUTABLE_LINKER__fanctrl_Debug CMakeFiles/fanctrl.dir/fanctrl.cpp.o
   FLAGS = -g
   LINK_FLAGS = -rdynamic
-  OBJECT_DIR = CMakeFiles/fanctrl_cpp.dir
+  OBJECT_DIR = CMakeFiles/fanctrl.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = fanctrl_cpp
-  TARGET_PDB = fanctrl_cpp.dbg
+  TARGET_FILE = fanctrl
+  TARGET_PDB = fanctrl.dbg
 
 
 #############################################
@@ -534,7 +534,7 @@ build CMakeFiles/ContinuousSubmit | ${cmake_ninja_workdir}CMakeFiles/ContinuousS
 #############################################
 # Folder: /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build
 
-build all: phony fanctrl_cpp
+build all: phony fanctrl
 
 # =============================================================================
 # Unknown Build Time Dependencies.

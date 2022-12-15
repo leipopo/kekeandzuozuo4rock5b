@@ -26,7 +26,7 @@
 /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/ContinuousCoverage.dir
 /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/ContinuousMemCheck.dir
 /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/ContinuousSubmit.dir
-/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/fanctrl_cpp.dir
+/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/fanctrl.dir
 /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/package.dir
 /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/package_source.dir
 /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/test.dir
