@@ -8,7 +8,7 @@ pwm_channel="pwm0"
 fan_maxpwm="7950"
 fan_minpwm="7400"
 fan_maxpower="1"
-fan_mod="0"
+fan_mod="0x11"
 fan_pwm="0"
 
 

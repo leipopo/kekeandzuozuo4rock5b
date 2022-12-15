@@ -33,6 +33,8 @@ public:
     int power2pwm(float power);
     void init(const char *path);
     void readconfigfile(const char *path);
+    void pwmcalc();
+    void setpwmdev();
 
 protected:
     const char *configfile_path;

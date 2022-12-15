@@ -99,8 +99,9 @@ void FAN ::readconfigfile(const char *path)
                 end = line.find_last_of('"');
                 this->fan_mod = stoi(line.substr(begin + 1, end - begin - 1));
             }
-            else if (item == "fan_pwm")
+            else if ((item == "fan_pwm")&&this->fan_mod==0x10)
             {
+
                 begin = line.find_first_of('"');
                 end = line.find_last_of('"');
                 this->fan_pwm = stoi(line.substr(begin + 1, end - begin - 1));
@@ -152,6 +153,25 @@ void FAN::init(const char *path)
     writefile(pwm_polarity_path, "normal");
 }
 
+int FAN::power2pwm(float power)
+{
+    int pwm = (this->fan_maxpwm - this->fan_minpwm) * fmin(power, this->fan_maxpower) + this->fan_minpwm;
+    return pwm;
+}
+
+void FAN::pwmcalc()
+{
+    
+}
+
+void FAN::setpwmdev()
+{
+    string data;
+    data = to_string(this->fan_pwm);
+    writefile(this->pwm_dutycycle_path, data);
+}
+
+
 int main()
 {
     FAN socfan, ssdfan;
@@ -159,6 +179,12 @@ int main()
     ssdfan.init(ssd_fan_configfile_path);
     while (1)
     {
+        socfan.readconfigfile(soc_fan_configfile_path);
+        ssdfan.readconfigfile(ssd_fan_configfile_path);
+        socfan.pwmcalc();
+        ssdfan.pwmcalc();
+        socfan.setpwmdev();
+        ssdfan.setpwmdev();
         usleep(1000 * 20);
     }
 }
