@@ -24,8 +24,7 @@ public:
     int fan_minpwm;
     int fan_mod;
     int fan_pwm;
-    const char *pwm_chip;
-    const char *pwm_channel;
+    
     float fan_maxpower;
     float exp_temp;
     float wall_temp;
@@ -36,7 +35,9 @@ public:
     void pwmcalc();
     void setpwmdev();
 
-protected:
+    const char *pwm_chip;
+    const char *pwm_channel;
+    
     const char *configfile_path;
     const char *pwm_dutycycle_path;
     const char *pwm_period_path;
