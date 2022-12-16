@@ -69,6 +69,36 @@
 
 运行风扇脚本：
 
-```cd $HOME/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build```
+```cd $HOME/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/build```
 
-```sudo ./fanctrl_cpp```
+```sudo ./fanctrl```
+
+### 调整风扇初始化文件参数
+
+不建议修改此文件排版
+
+#### 参数命名
+
+1. reset 调整参数后需要调整此参数为1
+
+2. obj 温控对象，暂时只有soc
+
+3. exp_temp 期望温度
+
+4. wall_temp 上限温度
+ 
+5. fan_maxpwm 风扇极限转速时pwm占空值
+
+6. fan_minpwm 风扇起转时的pwm占空值
+
+7. fan_maxpower 风扇最大功率 0--1.f
+
+8. fan_mod 1.线性滞回控制，2.手动控制 3.开关控制
+ 
+9. fan_pwm="0" 手动控制时给的pwm占空值
+
+10. pwm_period="10000" pwm周期值
+
+11. pwm_chip="/pwmchip15" pwm设备号
+
+12. pwm_channel="/pwm0" pwm设备下通道号
