@@ -1,4 +1,4 @@
-#include "fanctrl.hpp"
+#include ".fanctrl.hpp"
 #include <fstream>
 #include <iostream>
 #include <unistd.h>

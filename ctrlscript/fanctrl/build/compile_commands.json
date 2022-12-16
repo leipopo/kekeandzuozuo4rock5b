@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/build",
+  "command": "/usr/bin/aarch64-linux-gnu-g++ -g -o CMakeFiles/fanctrl.dir/fanctrl.cpp.o -c /home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/source/fanctrl.cpp",
+  "file": "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/source/fanctrl.cpp"
+}
+]
