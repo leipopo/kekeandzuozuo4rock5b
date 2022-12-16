@@ -181,12 +181,14 @@ void init(const char *path,FAN *fan)
     // {
     //     this->objtemp_path=ssd_temp_path;
     // }
- 
-    writefile(fan->pwm_enable_path, "1");
+    writefile(fan->pwm_export_path, "0");
     usleep(1000*1000);
     writefile(fan->pwm_dutycycle_path, to_string(fan->fan_pwm));
+    usleep(1000*10);
     writefile(fan->pwm_period_path, to_string(fan->pwm_period));
-    writefile(fan->pwm_export_path, "0");
+    usleep(1000*10);
+    writefile(fan->pwm_enable_path, "1");
+    usleep(1000*10);
     writefile(fan->pwm_polarity_path, "normal");
 }
 

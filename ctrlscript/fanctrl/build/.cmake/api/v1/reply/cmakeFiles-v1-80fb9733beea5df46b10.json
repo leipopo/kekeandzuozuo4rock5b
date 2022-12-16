@@ -6,7 +6,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/3.22.1/CMakeSystem.cmake"
+			"path" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/build/CMakeFiles/3.22.1/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -15,11 +15,11 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/3.22.1/CMakeCCompiler.cmake"
+			"path" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/build/CMakeFiles/3.22.1/CMakeCCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
+			"path" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/build/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -163,8 +163,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/build",
-		"source" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl_cpp/source"
+		"build" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/build",
+		"source" : "/home/rock/kekeandzuozuo4rockpi5b/ctrlscript/fanctrl/source"
 	},
 	"version" : 
 	{
