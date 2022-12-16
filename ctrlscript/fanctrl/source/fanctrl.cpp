@@ -1,7 +1,8 @@
 #include "fanctrl.hpp"
 
-
 using namespace std;
+
+
 
 void writefile(const char *path, string data)
 {
@@ -19,6 +20,16 @@ string readfile(const char *path)
     file >> data;
     file.close();
     return data;
+}
+
+void string2char(string str, char *ch)
+{
+    int i;
+    for (i = 0; i < str.length(); i++)
+    {
+        ch[i] = str[i];
+    }
+    ch[i]='\0';
 }
 
 void FAN ::readconfigfile(const char *path)
@@ -68,26 +79,6 @@ void FAN ::readconfigfile(const char *path)
                 end = line.find_last_of('"');
                 this->wall_temp = stof(line.substr(begin + 1, end - begin - 1));
             }
-            else if (item == "pwm_period")
-            {
-                begin = line.find_first_of('"');
-                end = line.find_last_of('"');
-                this->pwm_period = stoi(line.substr(begin + 1, end - begin - 1));
-            }
-            else if (item == "pwm_chip")
-            {
-                begin = line.find_first_of('"');
-                end = line.find_last_of('"');
-                this->pwm_chip = line.substr(begin + 1, end - begin - 1).c_str();
-                cout<<this->pwm_chip<<endl;
-            }
-            else if (item == "pwm_channel")
-            {
-                begin = line.find_first_of('"');
-                end = line.find_last_of('"');
-                this->pwm_channel = line.substr(begin + 1, end - begin - 1).c_str();
-                cout<<this->pwm_channel<<endl;
-            }
             else if (item == "fan_maxpwm")
             {
                 begin = line.find_first_of('"');
@@ -119,12 +110,32 @@ void FAN ::readconfigfile(const char *path)
                 end = line.find_last_of('"');
                 this->fan_pwm = stoi(line.substr(begin + 1, end - begin - 1));
             }
+            else if (item == "pwm_period")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->pwm_period = stoi(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "pwm_chip")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                string2char(line.substr(begin + 1, end - begin - 1), this->pwm_chip);
+                // cout << this->pwm_chip << endl;
+            }
+            else if (item == "pwm_channel")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                string2char(line.substr(begin + 1, end - begin - 1), this->pwm_channel);
+                // cout << this->pwm_channel << endl;
+            }
         }
     }
     file.close();
 }
 
-void FAN::init(const char *path)
+void init(const char *path,FAN *fan)
 {
     fstream file;
     file.open(path, ios::in | ios::out);
@@ -137,38 +148,46 @@ void FAN::init(const char *path)
     file.write("1", 1);
     file.close();
 
-    this->readconfigfile(path);
-    stringstream temp;
-    temp << pwm_path << this->pwm_chip << this->pwm_channel << "/duty_cycle";
-    string finalpath = temp.str();
-    //this->pwm_dutycycle_path = finalpath.append(&(this->pwm_chip)).append("/duty_cycle").c_str();
-    cout<<finalpath<<endl;
-    // finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/period";
-    // this->pwm_period_path = pwmdev_path.c_str();
+    fan->readconfigfile(path);
 
-    // finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/enable";
-    // this->pwm_enable_path = pwmdev_path.c_str();
+    const char *chip = fan->pwm_chip;
+    const char *channel = fan->pwm_channel;
+    string const &finalpath1 = pwm_path + string(chip);
+    string finalpath2 = finalpath1 + string(channel);
+    string export_path =finalpath1+"/export";
+    string duty_cycle_path = finalpath2 + "/duty_cycle";
+    string period_path = finalpath2 + "/period";
+    string enable_path = finalpath2 + "/enable";
+    string polarity_path = finalpath2 + string("/polarity");
 
-    // finalpath = pwmdev_path + this->pwm_chip + this->pwm_channel + "/polarity";
-    // this->pwm_polarity_path = pwmdev_path.c_str();
+    //cout << export_path << endl;
+    string2char(export_path, fan->pwm_export_path);
+    //cout << this->pwm_export_path << endl;
+    string2char(duty_cycle_path, fan->pwm_dutycycle_path);
+    string2char(period_path, fan->pwm_period_path);
+    string2char(enable_path, fan->pwm_enable_path);
+    string2char(polarity_path, fan->pwm_polarity_path);
 
-    // finalpath = pwmdev_path + this->pwm_chip + "/export";
-    // this->pwm_export_path = pwmdev_path.c_str();
-    
+ 
+    //cout << this->pwm_polarity_path << endl;
 
-    if (this->obj == soc)
+    if (fan->obj == soc)
     {
-        this->objtemp_path = soc_temp_path;
+        string temp = string(soc_temp_path);
+        string2char(temp,fan->objtemp_path);
+
     }
     // else if(this->obj==ssd)
     // {
     //     this->objtemp_path=ssd_temp_path;
     // }
-    writefile(pwm_enable_path, "1");
-    writefile(pwm_dutycycle_path, to_string(this->fan_pwm));
-    writefile(pwm_period_path, to_string(this->pwm_period));
-    writefile(pwm_export_path, "0");
-    writefile(pwm_polarity_path, "normal");
+ 
+    writefile(fan->pwm_enable_path, "1");
+    usleep(1000*1000);
+    writefile(fan->pwm_dutycycle_path, to_string(fan->fan_pwm));
+    writefile(fan->pwm_period_path, to_string(fan->pwm_period));
+    writefile(fan->pwm_export_path, "0");
+    writefile(fan->pwm_polarity_path, "normal");
 }
 
 int FAN::power2pwm(float power)
@@ -188,10 +207,11 @@ void FAN::boost()
 
 void FAN::pwmcalc()
 {
-    this->obj_temp = stof(readfile(this->objtemp_path)) / 1000.f;
+    string temp = readfile(this->objtemp_path);
+    this->obj_temp = stof(temp) / 1000.f;
     switch (this->fan_mod)
     {
-    case 0x01:
+    case switchmod:
     {
         if (this->obj_temp > this->wall_temp)
         {
@@ -205,7 +225,7 @@ void FAN::pwmcalc()
     }
     break;
 
-    case 0x11:
+    case linermod:
     {
         if (this->obj_temp > this->exp_temp + (this->wall_temp - this->exp_temp) * 3 / 5)
         {
@@ -234,8 +254,8 @@ void FAN::setpwmdev()
 int main()
 {
     FAN socfan, ssdfan;
-    socfan.init(soc_fan_configfile_path);
-    ssdfan.init(ssd_fan_configfile_path);
+    init(soc_fan_configfile_path,&socfan);
+    init(ssd_fan_configfile_path,&ssdfan);
     while (1)
     {
         socfan.readconfigfile(soc_fan_configfile_path);

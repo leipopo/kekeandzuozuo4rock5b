@@ -1,5 +1,4 @@
 #include <fstream>
-#include <sstream>
 #include <iostream>
 #include <unistd.h>
 #include <math.h>
@@ -32,20 +31,18 @@ public:
     float wall_temp;
 
     int power2pwm(float power);
-    void init(const char *path);
     void readconfigfile(const char *path);
     void pwmcalc();
     void setpwmdev();
     void boost();
 
-    const char *pwm_chip;
-    const char *pwm_channel;
-    
-    const char *configfile_path;
-    const char *objtemp_path;
-    const char *pwm_dutycycle_path;
-    const char *pwm_period_path;
-    const char *pwm_enable_path;
-    const char *pwm_polarity_path;
-    const char *pwm_export_path;
+    char pwm_chip[16]={'0',};
+    char pwm_channel[16]={'0',};
+
+    char objtemp_path[64]={'0',};
+    char pwm_dutycycle_path[64]={'0',};
+    char pwm_period_path[64]={'0',};
+    char pwm_enable_path[64]={'0',};
+    char pwm_polarity_path[64]={'0',};
+    char pwm_export_path[64]={'0',};
 };
