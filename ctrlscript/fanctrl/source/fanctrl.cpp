@@ -229,7 +229,7 @@ void FAN::pwmcalc()
 
     case linermod:
     {
-        if (this->obj_temp > this->exp_temp + (this->wall_temp - this->exp_temp) * 3 / 5)
+        if (this->obj_temp > this->exp_temp + (this->wall_temp - this->exp_temp) * 1 / 5)
         {
             this->boost();
             this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
