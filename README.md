@@ -4,17 +4,21 @@
 
 ## 给RockPi 5B V1.4硬件版本用的壳壳 （模型以CAD文件为准
 
-![上图](/img/P1.jpg "上图")
+![图](/img/P1.jpg "图")
 
-![下图](/img/P2.jpg "下图")
+![图](/img/P2.jpg "图")
 
-![风道剖视图](/img/P3.jpg "风道剖视图")
+![图](/img/P3.jpg "图")
 
-![风道剖视图（带座座）](/img/P4.jpg "风道剖视图（带座座）")
+![图](/img/P4.jpg "图")
 
-![右图](/img/P5.jpg "右图")
+![图](/img/P5.jpg "图")
 
-![左图](/img/P6.jpg "左图")
+![图](/img/P6.jpg "图")
+
+![图](/img/P7.jpg "图")
+
+![图](/img/P8.jpg "图")
 
 买不起台灯不太好打光就举着拍吧
 
@@ -29,6 +33,18 @@
 ![rp5](/img/rp5.jpg "图")
 
 ![rp6](/img/rp6.jpg "图")
+
+![rp7](/img/rp7.jpg "图")
+
+![rp8](/img/rp8.jpg "图")
+
+![rp9](/img/rp9.jpg "图")
+
+![rp10](/img/rp10.jpg "图")
+
+![rp11](/img/rp11.jpg "图")
+
+
 
 ## 物料购买注意事项
 
