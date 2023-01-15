@@ -2,8 +2,6 @@
 
 using namespace std;
 
-
-
 void writefile(const char *path, string data)
 {
     ofstream file;
@@ -29,7 +27,7 @@ void string2char(string str, char *ch)
     {
         ch[i] = str[i];
     }
-    ch[i]='\0';
+    ch[i] = '\0';
 }
 
 void FAN ::readconfigfile(const char *path)
@@ -135,7 +133,7 @@ void FAN ::readconfigfile(const char *path)
     file.close();
 }
 
-void init(const char *path,FAN *fan)
+void init(const char *path, FAN *fan)
 {
     fstream file;
     file.open(path, ios::in | ios::out);
@@ -154,41 +152,39 @@ void init(const char *path,FAN *fan)
     const char *channel = fan->pwm_channel;
     string const &finalpath1 = pwm_path + string(chip);
     string finalpath2 = finalpath1 + string(channel);
-    string export_path =finalpath1+"/export";
+    string export_path = finalpath1 + "/export";
     string duty_cycle_path = finalpath2 + "/duty_cycle";
     string period_path = finalpath2 + "/period";
     string enable_path = finalpath2 + "/enable";
     string polarity_path = finalpath2 + string("/polarity");
 
-    //cout << export_path << endl;
+    // cout << export_path << endl;
     string2char(export_path, fan->pwm_export_path);
-    //cout << this->pwm_export_path << endl;
+    // cout << this->pwm_export_path << endl;
     string2char(duty_cycle_path, fan->pwm_dutycycle_path);
     string2char(period_path, fan->pwm_period_path);
     string2char(enable_path, fan->pwm_enable_path);
     string2char(polarity_path, fan->pwm_polarity_path);
 
- 
-    //cout << this->pwm_polarity_path << endl;
+    // cout << this->pwm_polarity_path << endl;
 
     if (fan->obj == soc)
     {
         string temp = string(soc_temp_path);
-        string2char(temp,fan->objtemp_path);
-
+        string2char(temp, fan->objtemp_path);
     }
     // else if(this->obj==ssd)
     // {
     //     this->objtemp_path=ssd_temp_path;
     // }
     writefile(fan->pwm_export_path, "0");
-    usleep(1000*1000);
+    usleep(1000 * 1000);
     writefile(fan->pwm_dutycycle_path, to_string(fan->fan_pwm));
-    usleep(1000*10);
+    usleep(1000 * 10);
     writefile(fan->pwm_period_path, to_string(fan->pwm_period));
-    usleep(1000*10);
+    usleep(1000 * 10);
     writefile(fan->pwm_enable_path, "1");
-    usleep(1000*10);
+    usleep(1000 * 10);
     writefile(fan->pwm_polarity_path, "normal");
 }
 
@@ -229,7 +225,11 @@ void FAN::pwmcalc()
 
     case linermod:
     {
-        if (this->obj_temp > this->exp_temp + (this->wall_temp - this->exp_temp) * 1 / 5)
+        if (this->obj_temp > this->wall_temp)
+        {
+            writefile(this->pwm_enable_path, "1");
+        }
+        if (this->obj_temp > this->exp_temp +5)
         {
             this->boost();
             this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
@@ -237,6 +237,7 @@ void FAN::pwmcalc()
         else if (this->obj_temp < this->exp_temp)
         {
             this->fan_pwm = 0;
+            writefile(this->pwm_enable_path, "0");
         }
     }
     break;
@@ -256,8 +257,8 @@ void FAN::setpwmdev()
 int main()
 {
     FAN socfan, ssdfan;
-    init(soc_fan_configfile_path,&socfan);
-    init(ssd_fan_configfile_path,&ssdfan);
+    init(soc_fan_configfile_path, &socfan);
+    init(ssd_fan_configfile_path, &ssdfan);
     while (1)
     {
         socfan.readconfigfile(soc_fan_configfile_path);
