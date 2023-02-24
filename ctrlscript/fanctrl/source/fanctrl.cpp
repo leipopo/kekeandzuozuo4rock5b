@@ -195,7 +195,7 @@ void init(const char *path, FAN *fan)
     usleep(1000 * 10);
     writefile(fan->pwm_period_path, to_string(fan->pwm_period));
     usleep(1000 * 10);
-    writefile(fan->pwm_enable_path, "1");
+    writefile(fan->pwm_enable_path, "0");
     usleep(1000 * 10);
     writefile(fan->pwm_polarity_path, "normal");
 }
