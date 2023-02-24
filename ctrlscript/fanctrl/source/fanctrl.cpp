@@ -202,7 +202,7 @@ void init(const char *path, FAN *fan)
 
 int FAN::power2pwm(float power)
 {
-    int pwm = (this->fan_maxpwm - this->fan_minpwm) * fmin(power, this->fan_maxpower) + this->fan_minpwm;
+    int pwm = (this->fan_maxpwm - this->fan_minpwm) * power * this->fan_maxpower + this->fan_minpwm;
     return pwm;
 }
 
