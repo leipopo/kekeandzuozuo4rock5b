@@ -97,7 +97,9 @@
 
 不建议修改此文件排版
 
-### 参数命名
+### 参数命名及作用
+
+![风扇原理示意图](/img/fan.jpg "风扇原理示意图")
 
 1. reset 调整参数后需要调整此参数为1
 
@@ -106,19 +108,23 @@
 3. exp_temp 期望温度
 
 4. wall_temp 上限温度
+
+5. lowpower_temp 进入低速区温度
+
+6. fanon_temp 风扇开启温度
  
-5. fan_maxpwm 风扇极限转速时pwm占空值
+7. fan_maxpwm 风扇极限转速时pwm占空值
 
-6. fan_minpwm 风扇起转时的pwm占空值
+8. fan_minpwm 风扇起转时的pwm占空值
 
-7. fan_maxpower 风扇最大功率 0--1.f
+9. fan_maxpower 风扇最大功率 0--1.f
 
-8. fan_mod 1.线性滞回控制，2.手动控制 3.开关控制
+10. fan_mod 1.线性滞回控制，2.手动控制 3.开关控制
  
-9. fan_pwm="0" 手动控制时给的pwm占空值
+11. fan_pwm="0" 手动控制时给的pwm占空值
 
-10. pwm_period="10000" pwm周期值
+12. pwm_period="10000" pwm周期值
 
-11. pwm_chip="/pwmchip15" pwm设备号
+13. pwm_chip="/pwmchip15" pwm设备号
 
-12. pwm_channel="/pwm0" pwm设备下通道号
+14. pwm_channel="/pwm0" pwm设备下通道号
