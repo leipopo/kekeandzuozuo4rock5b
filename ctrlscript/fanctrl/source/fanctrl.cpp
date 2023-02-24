@@ -240,10 +240,10 @@ void FAN::pwmcalc()
         if (this->obj_temp > this->fanon_temp)
         {
             writefile(this->pwm_enable_path, "1");
+            this->boost();
         }
         if (this->obj_temp > this->lowpower_temp)
         {
-            this->boost();
             this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
         }
         else if (this->obj_temp < this->exp_temp)
@@ -271,15 +271,15 @@ int main()
     // FAN socfan, ssdfan;
     FAN socfan;
     init(soc_fan_configfile_path, &socfan);
-    //init(ssd_fan_configfile_path, &ssdfan);
+    // init(ssd_fan_configfile_path, &ssdfan);
     while (1)
     {
         socfan.readconfigfile(soc_fan_configfile_path);
-        //ssdfan.readconfigfile(ssd_fan_configfile_path);
+        // ssdfan.readconfigfile(ssd_fan_configfile_path);
         socfan.pwmcalc();
-        //ssdfan.pwmcalc();
+        // ssdfan.pwmcalc();
         socfan.setpwmdev();
-        //ssdfan.setpwmdev();
+        // ssdfan.setpwmdev();
         usleep(1000 * 20);
     }
 }
