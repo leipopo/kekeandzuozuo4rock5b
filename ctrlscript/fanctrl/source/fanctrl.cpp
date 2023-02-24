@@ -211,7 +211,7 @@ void FAN::boost()
     if (this->fan_pwm == 0)
     {
         writefile(pwm_dutycycle_path, to_string(this->pwm_period));
-        usleep(500 * 1000); // 500ms
+        usleep(1000 * 1000); // 500ms
     }
 }
 
