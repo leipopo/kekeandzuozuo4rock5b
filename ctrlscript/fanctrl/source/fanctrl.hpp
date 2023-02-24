@@ -29,6 +29,8 @@ public:
     float fan_maxpower;
     float exp_temp;
     float wall_temp;
+    float lowpower_temp;
+    float fanon_temp;
 
     int power2pwm(float power);
     void readconfigfile(const char *path);

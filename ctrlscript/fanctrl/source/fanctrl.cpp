@@ -77,6 +77,18 @@ void FAN ::readconfigfile(const char *path)
                 end = line.find_last_of('"');
                 this->wall_temp = stof(line.substr(begin + 1, end - begin - 1));
             }
+            else if (item == "lowpower_temp")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->lowpower_temp = stof(line.substr(begin + 1, end - begin - 1));
+            }
+            else if (item == "fanon_temp")
+            {
+                begin = line.find_first_of('"');
+                end = line.find_last_of('"');
+                this->fanon_temp = stof(line.substr(begin + 1, end - begin - 1));
+            }
             else if (item == "fan_maxpwm")
             {
                 begin = line.find_first_of('"');
@@ -225,11 +237,11 @@ void FAN::pwmcalc()
 
     case linermod:
     {
-        if (this->obj_temp > this->wall_temp)
+        if (this->obj_temp > this->fanon_temp)
         {
             writefile(this->pwm_enable_path, "1");
         }
-        if (this->obj_temp > this->exp_temp +5)
+        if (this->obj_temp > this->lowpower_temp)
         {
             this->boost();
             this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
