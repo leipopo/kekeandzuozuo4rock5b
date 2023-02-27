@@ -198,6 +198,7 @@ void init(const char *path, FAN *fan)
     writefile(fan->pwm_enable_path, "0");
     usleep(1000 * 10);
     writefile(fan->pwm_polarity_path, "normal");
+    fan->switcher = false;
 }
 
 int FAN::power2pwm(float power)
@@ -239,6 +240,7 @@ void FAN::pwmcalc()
             if (this->switcher == false)
             {
                 this->boost();
+                this->boosttime++;
             }
             if (this->boosttime >= boosttime_max)
             {
@@ -248,7 +250,7 @@ void FAN::pwmcalc()
         }
         if (this->obj_temp > this->lowpower_temp)
         {
-            if (this->boosttime == 0)
+            if (this->switcher == true)
             {
                 this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
             }
