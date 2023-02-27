@@ -208,11 +208,8 @@ int FAN::power2pwm(float power)
 
 void FAN::boost()
 {
-    if (this->fan_pwm == 0)
-    {
         writefile(pwm_dutycycle_path, to_string(this->pwm_period));
-        usleep(1000 * 1000); // 500ms
-    }
+        sleep(2); // 2s
 }
 
 void FAN::pwmcalc()
@@ -280,6 +277,6 @@ int main()
         // ssdfan.pwmcalc();
         socfan.setpwmdev();
         // ssdfan.setpwmdev();
-        usleep(1000 * 20);
+        usleep(20*1000);
     }
 }
