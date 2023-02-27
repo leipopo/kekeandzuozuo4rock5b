@@ -13,11 +13,13 @@
 #define linermod 1
 #define manualmod 2
 #define switchmod 3
-
+#define boosttime_max 200
 
 class FAN
 {
 public:
+    bool switcher;
+    int boosttime;
     int obj;
     int pwm_period;
     int fan_maxpwm;

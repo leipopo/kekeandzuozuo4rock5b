@@ -208,8 +208,7 @@ int FAN::power2pwm(float power)
 
 void FAN::boost()
 {
-        writefile(pwm_dutycycle_path, to_string(this->pwm_period));
-        sleep(2); // 2s
+    writefile(pwm_dutycycle_path, to_string(this->pwm_period));
 }
 
 void FAN::pwmcalc()
@@ -237,16 +236,28 @@ void FAN::pwmcalc()
         if (this->obj_temp > this->fanon_temp)
         {
             writefile(this->pwm_enable_path, "1");
-            this->boost();
+            if (this->switcher == false)
+            {
+                this->boost();
+            }
+            if (this->boosttime >= boosttime_max)
+            {
+                this->boosttime = 0;
+                this->switcher = true;
+            }
         }
         if (this->obj_temp > this->lowpower_temp)
         {
-            this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
+            if (this->boosttime == 0)
+            {
+                this->fan_pwm = this->power2pwm((this->obj_temp - this->exp_temp) / (this->wall_temp - this->exp_temp));
+            }
         }
         else if (this->obj_temp < this->exp_temp)
         {
             this->fan_pwm = 0;
             writefile(this->pwm_enable_path, "0");
+            this->switcher = false;
         }
     }
     break;
@@ -277,6 +288,6 @@ int main()
         // ssdfan.pwmcalc();
         socfan.setpwmdev();
         // ssdfan.setpwmdev();
-        usleep(20*1000);
+        usleep(20 * 1000);
     }
 }
