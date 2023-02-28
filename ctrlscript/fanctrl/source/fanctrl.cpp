@@ -236,10 +236,11 @@ void FAN::pwmcalc()
     {
         if (this->obj_temp > this->fanon_temp)
         {
-            writefile(this->pwm_enable_path, "1");
+            
             if (this->switcher == false)
             {
                 this->boost();
+                writefile(this->pwm_enable_path, "1");
                 this->boosttime++;
             }
             if (this->boosttime >= boosttime_max)
